@@ -23,20 +23,26 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Mohammad Ebrahim — Cyber Security Researcher",
+  metadataBase: new URL("https://mohammadebrahim.com"),
+  title: "Mohammad Ebrahim — Cyber Security Analyst",
   description:
-    "Portfolio of Mohammad Ebrahim — Cyber Security Researcher. Vulnerability research, reverse engineering, and offensive security, featuring an interactive 3D scene built with Next.js and React Three Fiber.",
+    "Portfolio of Mohammad Ebrahim — Cyber Security Analyst. Vulnerability research, reverse engineering, and offensive security, featuring an interactive 3D scene built with Next.js and React Three Fiber.",
   authors: [{ name: "Mohammad Ebrahim" }],
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Mohammad Ebrahim — Cyber Security Researcher",
+    title: "Mohammad Ebrahim — Cyber Security Analyst",
     description:
       "Vulnerability research, reverse engineering, and offensive security. Interactive 3D portfolio built with Next.js and React Three Fiber.",
+    url: "https://mohammadebrahim.com",
+    siteName: "Mohammad Ebrahim",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mohammad Ebrahim — Cyber Security Researcher",
+    title: "Mohammad Ebrahim — Cyber Security Analyst",
     description:
       "Vulnerability research, reverse engineering, and offensive security. Interactive 3D portfolio.",
   },
