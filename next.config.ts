@@ -31,6 +31,19 @@ const nextConfig: NextConfig = {
   // `node server.js`. Trims the final image to ~100 MB.
   output: "standalone",
 
+  // Next 16 blocks cross-origin requests to /_next/* dev resources by
+  // default. When the dev server is reached through a proxy/preview the
+  // client chunks get blocked, hydration never runs, and scroll-reveal
+  // sections stay invisible. Allow the local/preview hosts so dev works
+  // when opened via a tunnel. (No effect on production `next start`.)
+  allowedDevOrigins: [
+    "127.0.0.1",
+    "localhost",
+    "*.cursor.sh",
+    "*.cursor.com",
+    "*.trycloudflare.com",
+  ],
+
   async headers() {
     return [
       {
