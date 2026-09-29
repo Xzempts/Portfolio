@@ -381,8 +381,6 @@ export default function Home() {
                 style={{ ["--d" as string]: "520ms" }}
               >
                 {t("hero.roleLine")}
-                <br />
-                {t("hero.tagline")}
               </p>
 
               {/* CTAs */}

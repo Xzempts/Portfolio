@@ -44,12 +44,8 @@ export const DICT = {
   hero: {
     greeting: { es: "Hola, soy", en: "Hi, I am" },
     roleLine: {
-      es: "Investigador de Ciberseguridad.",
-      en: "Cyber Security Researcher.",
-    },
-    tagline: {
-      es: "Investigación de vulnerabilidades, ingeniería inversa y seguridad ofensiva.",
-      en: "Vulnerability research, reverse engineering, and offensive security.",
+      es: "Cyber Security",
+      en: "Cyber Security",
     },
     cv: { es: "Descargar CV", en: "Download résumé" },
     hire: { es: "Contactarme", en: "Contact me" },
