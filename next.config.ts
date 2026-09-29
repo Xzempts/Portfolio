@@ -25,17 +25,27 @@ const securityHeaders = [
   },
 ];
 
+// When EXPORT=true we emit a fully static site to `out/` (`next build`) for
+// GitHub Pages and other static hosts. Otherwise we emit the standalone
+// server bundle used by the Docker image. Static export can't apply
+// `headers()` or next/image optimization, so those are only enabled on the
+// server build.
+const isExport = process.env.EXPORT === "true";
+
 const nextConfig: NextConfig = {
-  // Emits a minimal server bundle at `.next/standalone/` so the Docker
-  // runtime image can drop npm/node_modules entirely and just run
-  // `node server.js`. Trims the final image to ~100 MB.
-  output: "standalone",
+  // export → static `out/` for GitHub Pages; otherwise a minimal standalone
+  // server bundle at `.next/standalone/` for the Docker runtime image.
+  output: isExport ? "export" : "standalone",
+
+  // next/image isn't used (the carousel uses plain <img>), but disable the
+  // optimizer under static export so nothing tries to hit a runtime service.
+  ...(isExport ? { images: { unoptimized: true } } : {}),
 
   // Next 16 blocks cross-origin requests to /_next/* dev resources by
   // default. When the dev server is reached through a proxy/preview the
   // client chunks get blocked, hydration never runs, and scroll-reveal
   // sections stay invisible. Allow the local/preview hosts so dev works
-  // when opened via a tunnel. (No effect on production `next start`.)
+  // when opened via a tunnel. (No effect on production builds.)
   allowedDevOrigins: [
     "127.0.0.1",
     "localhost",
@@ -44,14 +54,20 @@ const nextConfig: NextConfig = {
     "*.trycloudflare.com",
   ],
 
-  async headers() {
-    return [
-      {
-        source: "/:path*",
-        headers: securityHeaders,
-      },
-    ];
-  },
+  // Security headers only apply to the server build. On a static host like
+  // GitHub Pages these must be configured at the CDN/host level instead.
+  ...(isExport
+    ? {}
+    : {
+        async headers() {
+          return [
+            {
+              source: "/:path*",
+              headers: securityHeaders,
+            },
+          ];
+        },
+      }),
 };
 
 export default nextConfig;

@@ -137,17 +137,44 @@ All UI strings live in `lib/i18n.ts` as a flat dictionary with `{ es, en }` leav
 
 ## Deployment
 
-### Vercel (Recommended)
+### GitHub Pages (free, current setup)
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Txemalon/3d-portfolio)
+This repo ships a GitHub Actions workflow (`.github/workflows/deploy.yml`) that
+builds a **static export** and publishes it to GitHub Pages on every push to the
+default branch.
+
+1. Push this repo to GitHub.
+2. In the repo, go to **Settings → Pages** and set **Source: GitHub Actions**.
+3. (Optional custom domain) Under **Settings → Pages → Custom domain**, enter
+   your domain and save. GitHub provisions a free HTTPS certificate
+   automatically once DNS resolves. A `CNAME` file is committed for you.
+4. Point your registrar's DNS at GitHub Pages:
+   - **Apex** (`example.com`) — four `A` records to
+     `185.199.108.153`, `185.199.109.153`, `185.199.110.153`, `185.199.111.153`
+     (and the matching `AAAA` records for IPv6).
+   - **www** — a `CNAME` to `<your-github-username>.github.io`.
+
+The static build is produced with `EXPORT=true npm run build`, which writes the
+site to `out/`. To preview it locally: `npx serve out` (or
+`python3 -m http.server --directory out`).
+
+> Note: static hosts like GitHub Pages can't apply the Next.js `headers()`
+> security headers. They're only emitted for the server/Docker build. Configure
+> equivalent headers at your CDN if needed.
+
+### Vercel
+
+Vercel auto-detects Next.js with zero config and keeps the security headers
+working. Import the GitHub repo at [vercel.com/new](https://vercel.com/new).
 
 ### Docker / Self-Hosted
 
-The included `Dockerfile` produces a standalone Next.js image. Works with any container platform (Railway, Fly.io, Coolify, etc.):
+The included `Dockerfile` produces a standalone Next.js image (server build,
+no `EXPORT`). Works with any container platform (Railway, Fly.io, Coolify, etc.):
 
 ```bash
-docker build -t 3d-portfolio .
-docker run -p 3000:3000 3d-portfolio
+docker build -t portfolio .
+docker run -p 3000:3000 portfolio
 ```
 
 ## Performance
