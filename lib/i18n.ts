@@ -44,8 +44,8 @@ export const DICT = {
   hero: {
     greeting: { es: "Hola, soy", en: "Hi, I am" },
     roleLine: {
-      es: "Cyber Security",
-      en: "Cyber Security",
+      es: "Cyber Security Analyst",
+      en: "Cyber Security Analyst",
     },
     cv: { es: "Descargar CV", en: "Download résumé" },
     hire: { es: "Contactarme", en: "Contact me" },
