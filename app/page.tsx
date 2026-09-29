@@ -180,7 +180,7 @@ const experiences: Array<{
     role: { es: "Aprendiz de Ciberseguridad", en: "Cyber Security Apprentice" },
     company: "Pearl Consulting Group",
     period: { es: "Sep 2026 — Presente", en: "Sep 2026 — Present" },
-    location: { es: "Ypsilanti, MI", en: "Ypsilanti, MI" },
+    location: { es: "Chicago, IL", en: "Chicago, IL" },
     summary: {
       es: "Evalúo cómo las empresas pueden adoptar herramientas de IA sin abrir nuevas superficies de ataque, alineando los controles con marcos reconocidos.",
       en: "Assessing how enterprises can adopt AI tooling without opening new attack surface, aligning controls to recognised frameworks.",
